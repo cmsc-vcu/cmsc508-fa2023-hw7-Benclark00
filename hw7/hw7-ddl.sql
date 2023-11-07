@@ -36,7 +36,6 @@ CREATE TABLE skills (
     skills_name varchar(256) NOT NULL,
     skills_description varchar(4096),
     skills_tag varchar(256),
-    skills_tag varchar(256),
     skills_time_commitment int,
     PRIMARY KEY (skills_id)
 );
@@ -82,7 +81,7 @@ CREATE TABLE peopleskills (
     peopleskills_skills_id int not null,
     people_id int not null,
     peopleskills_date_acquired date not null,
-    PRIMARY KEY (people_id)
+    PRIMARY KEY (peopleskills_id)
 );
 
 
@@ -109,7 +108,7 @@ CREATE TABLE roles (
     roles_id int not null,
     roles_name varchar(256) not null,
     sort_priority int not null,
-    PRIMARY KEY (people_id)
+    PRIMARY KEY (roles_id)
 );
 
 
