@@ -31,7 +31,7 @@ SET FOREIGN_KEY_CHECKS=1;
 CREATE TABLE skills (
     skills_id int,
     skills_name varchar(256) NOT NULL,
-    skills_description varchar(256),
+    skills_description varchar(4096),
     skills_tag varchar(256),
     skills_tag varchar(256),
     skills_time_commitment int,
@@ -57,7 +57,7 @@ CREATE TABLE people (
     people_email varchar(256),
     people_linkedin_url varchar(256),
     people_headshot_url varchar(256),
-    people_brief_bio varchar(256),
+    people_brief_bio varchar(4096),
     people_date_joined date,
     PRIMARY KEY (people_id)
 );
