@@ -18,7 +18,7 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS people;
-# ... 
+DROP TABLE IF EXISTS skills;
 SET FOREIGN_KEY_CHECKS=1;
 
 # Section 2
@@ -28,11 +28,21 @@ SET FOREIGN_KEY_CHECKS=1;
 # time committment offers some sense of how much time was required (or will be required) to gain the skill.
 # You can assign the skill descriptions.  Please be creative!
 
+CREATE TABLE skills (
+    skills_id int,
+    skills_name varchar(256) NOT NULL,
+    skills_description varchar(256),
+    skills_tag varchar(256),
+    skills_tag varchar(256),
+    skills_time_commitment int,
+    PRIMARY KEY (skills_id)
+);
 
 # Section 3
 # Populate skills
 # Populates the skills table with eight skills, their tag fields must exactly contain “Skill 1”, “Skill 2”, etc.
 # You can assign skill names.  Please be creative!
+
 
 
 # Section 4
@@ -42,7 +52,13 @@ SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE people (
     people_id int,
+    people_first_name varchar(256),
     people_last_name varchar(256) NOT NULL,
+    people_email varchar(256),
+    people_linkedin_url varchar(256),
+    people_headshot_url varchar(256),
+    people_brief_bio varchar(256),
+    people_date_joined date,
     PRIMARY KEY (people_id)
 );
 
@@ -57,6 +73,14 @@ insert into people (people_id,people_last_name) values (1,'Person 1');
 # Section 6
 # Create peopleskills( id, skills_id, people_id, date_acquired )
 # None of the fields can ba NULL. ID can be auto_increment.
+
+CREATE TABLE peopleskills (
+    peopleskills_id int not null,
+    peopleskills_skills_id int not null,
+    people_id int not null,
+    peopleskills_date_acquired date not null,
+    PRIMARY KEY (people_id)
+);
 
 
 # Section 7
@@ -78,6 +102,12 @@ insert into people (people_id,people_last_name) values (1,'Person 1');
 # Create roles( id, name, sort_priority )
 # sort_priority is an integer and is used to provide an order for sorting roles
 
+CREATE TABLE roles (
+    roles_id int not null,
+    roles_name varchar(256) not null,
+    sort_priority int not null,
+    PRIMARY KEY (people_id)
+);
 
 
 # Section 9
@@ -91,7 +121,13 @@ insert into people (people_id,people_last_name) values (1,'Person 1');
 # Create peopleroles( id, people_id, role_id, date_assigned )
 # None of the fields can be null.  ID can be auto_increment
 
-
+CREATE TABLE peopleroles (
+    peopleroles_id int not null,
+    peopleroles_people_id int not null,
+    peopleroles_role_id int not null,
+    peopleroles_date_assigned date not null,
+    PRIMARY KEY (peopleroles_id)
+);
 
 # Section 11
 # Populate peopleroles
