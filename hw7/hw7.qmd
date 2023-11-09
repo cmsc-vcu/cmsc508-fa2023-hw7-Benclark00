@@ -129,7 +129,7 @@ Below is a list of data in the *people* table.
 sql = f"""
 select * from people;
 """
-## Add code to list roles table here
+
 try:
     df = pd.read_sql(sql,cnx)
     df
@@ -150,7 +150,18 @@ Below is a list of data in the *skills* table.
 #| echo: false
 #| eval: true
 
-## Add code to list roles table here
+sql = f"""
+select * from skills;
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
 ```
 
 ### Roles table
@@ -163,7 +174,18 @@ Below is a list of data in the *roles* table.
 #| echo: false
 #| eval: true
 
-## Add code to list roles table here
+sql = f"""
+select * from roles;
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
 ```
 
 
@@ -173,16 +195,14 @@ Let's explore the database!
 
 # List skill names, tags, and descriptions ordered by name
 
-(here a sample query)
 
 ```{python}
 sql = f"""
-select * from people
+select skills_name, skills_tag, skills_description from skills
+order by skills_name;
 """
 ```
 
-
-(and here is a sample result from the query)
 
 ```{python}
 #| echo: false
@@ -201,12 +221,71 @@ df
 
 ### List people names and email addresses ordered by last_name
 
+```{python}
+sql = f"""
+select people_first_name, people_last_name, people_email from people
+order by people_last_name;
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List skill names of Person 1
 
+```{python}
+sql = f"""
+select skills_name from skills join peopleskills on skills_id = peopleskills_skills_id
+where peopleskills_people_id = 1;
+"""
+```
 
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 ### List people names with Skill 6
 
+```{python}
+sql = f"""
+select people_first_name as "first name", people_last_name as "last name" from people join peopleskills on people_id = peopleskills_people_id
+where peopleskills_skills_id = 6;
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List people with a DEVELOPER role
 
@@ -218,6 +297,7 @@ df
 
 
 ### List people names and skill names with the BOSS role
+
 
 
 ### List ids and names of unused roles
