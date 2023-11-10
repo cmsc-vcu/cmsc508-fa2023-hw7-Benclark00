@@ -10,9 +10,7 @@ format:
         code-copy: true
 ---
 
-(include a brief description of what is in this document)
-
-(Please clean up any comments that I included.  This is a scaffold document.)
+This document contains information on the resume, or 'user', database we have been tasked with creating. This document also contains and displays the results from a few SQL queries and shows what types of elements are stored in the tables for our boss' assignment for us to create a database.
 
 GITHUB URL:  https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-Benclark00
 
@@ -92,11 +90,11 @@ except Exception as e:
 
 ## Overview and description
 
-(briefly describe the project and the database)
+This project is the creation and dsiplay of queries for a database that we were tasked to create for our company. The boss thought it would be a good idea to have a place to display our skills, roles, and contact information, as it may speed up business. I appreciate our company and it's aid to help me pay for my student debts, while allowing me to advance my career and i'm very happy to be the one to create this database.
 
 ## Crows-foot diagram
 
-(add a description of the diagram and what the reader is seeing.)
+This diagram shows that a customer may place none or multiple orders, and each order can only be placed by one customer. Additionally, one or more customer(s) can use one or more delivery address. These together with the specific rows in each table, help to give the viewer a holistic view of placing an order.
 
 ```{mermaid}
 %%| echo: false
@@ -119,7 +117,7 @@ For the people, skills, and roles tables, provide a description of each table an
 
 ### People table
 
-The *people* table contains elements that describe ... 
+The *people* table contains elements that describe the current employees information, including their contact information, and a brief bio on each employee.
 
 Below is a list of data in the *people* table.
 
@@ -142,7 +140,7 @@ df
 
 ### Skills table
 
-The *skills* table contains elements that describe ... 
+The *skills* table contains elements that describe the skills people working at the company currently possess, the skills present are apart of a general skill set.
 
 Below is a list of data in the *skills* table.
 
@@ -166,7 +164,7 @@ df
 
 ### Roles table
 
-The *roles* table contains elements that describe ... 
+The *roles* table contains elements that describe the role(s) each employee has at the company, as well as when each employee earned/ was assigned each role.
 
 Below is a list of data in the *roles* table.
 
@@ -226,9 +224,7 @@ sql = f"""
 select people_first_name, people_last_name, people_email from people
 order by people_last_name;
 """
-```
 
-```{python}
 #| echo: false
 #| eval: true
 try:
@@ -249,9 +245,7 @@ sql = f"""
 select skills_name from skills join peopleskills on skills_id = peopleskills_skills_id
 where peopleskills_people_id = 1;
 """
-```
 
-```{python}
 #| echo: false
 #| eval: true
 try:
@@ -271,9 +265,7 @@ sql = f"""
 select people_first_name as "first name", people_last_name as "last name" from people join peopleskills on people_id = peopleskills_people_id
 where peopleskills_skills_id = 6;
 """
-```
 
-```{python}
 #| echo: false
 #| eval: true
 try:
@@ -289,21 +281,124 @@ df
 
 ### List people with a DEVELOPER role
 
+```{python}
+sql = f"""
+select people_first_name as first_name, people_last_name as last_name from people inner join peopleroles on people.people_id = peopleroles.peopleroles_people_id
+where peopleroles.peopleroles_roles_id = 2;
+"""
+
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List names and email addresses of people without skills
 
+```{python}
+sql = f"""
+select people.people_first_name as "first name", people.people_last_name as "last name", people.people_email from people left join peopleskills on people.people_id = peopleskills.peopleskills_people_id
+where peopleskills.peopleskills_people_id IS NULL;
+"""
+
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List names and tags of unused skills
 
+```{python}
+sql = f"""
+select skills_name, skills_tag from skills left join peopleskills on skills_id = peopleskills_skills_id
+where peopleskills_skills_id IS NULL;
+"""
+
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List people names and skill names with the BOSS role
 
+```{python}
+sql = f"""
+select people.people_first_name as first_name,
+people.people_last_name as last_name,
+skills.skills_name as name_of_skill from 
+people 
+join 
+peopleroles on people.people_id = peopleroles.peopleroles_people_id
+join 
+roles on peopleroles.peopleroles_roles_id = roles.roles_id
+join 
+peopleskills on peopleskills.peopleskills_people_id = people.people_id
+join 
+skills on peopleskills.peopleskills_skills_id = skills.skills_id
+where peopleroles.peopleroles_roles_id = 5;
+"""
 
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List ids and names of unused roles
 
+select roles.roles_id, roles.roles_name
+```{python}
+sql = f"""
+select roles.roles_id, roles.roles_name from roles
+left join
+peopleroles on roles.roles_id = peopleroles.peopleroles_roles_id
+where peopleroles.peopleroles_roles_id is null;
+"""
+
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ## Reflection
 
-(Write a paragraph expressing your thoughts, feelings, and insights about your experience with this assignment.  Pause and breath before writing - I'm trying to encourage critical thinking and self-awareness while allowing you to explore the connections between theory and practice. And yes, delete this paragraph.)
+I thought this assignment built on what we had learned quite quickly. Although it took a bit more effort, this assignment was able to accomplished and wasn't too bad after figuring out how to use the ddl file. I now believe that SQL is a very important tool to have in my developer tool kit after this assignment. For this next assignment and the final project I need to start putting together the necessary work now and not procrastinate. I'm still very excited to see where SQL takes me and I really enjoy the assignments and what I am learning in class.
 

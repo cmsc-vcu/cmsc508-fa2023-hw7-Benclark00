@@ -179,10 +179,10 @@ insert into roles(roles_id, roles_name, sort_priority) values (6, 'Mentor', 60);
 CREATE TABLE peopleroles (
     peopleroles_id int not null,
     peopleroles_people_id int not null,
-    peopleroles_role_id int not null,
+    peopleroles_roles_id int not null,
     peopleroles_date_assigned date not null,
     PRIMARY KEY (peopleroles_id),
-    FOREIGN KEY (peopleroles_role_id) REFERENCES roles(roles_id),
+    FOREIGN KEY (peopleroles_roles_id) REFERENCES roles(roles_id),
     FOREIGN KEY (peopleroles_people_id) REFERENCES people(people_id)
 );
 
@@ -199,18 +199,18 @@ CREATE TABLE peopleroles (
 # Person 9 is Developer
 # Person 10 is Developer and Designer
 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (1, 1, 2, '2023-11-08');
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (2, 2, 5, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (3, 2, 6, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (4, 3, 2, '2023-11-08');
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (5, 3, 4, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (6, 4, 3, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (7, 5, 3, '2023-11-08');
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (8, 6, 1, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (9, 6, 2, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (10, 7, 1, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (11, 8, 1, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (12, 8, 4, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (13, 9, 2, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (14, 10, 1, '2023-11-08'); 
-INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_role_id, peopleroles_date_assigned) values (15, 10, 2, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (1, 1, 2, '2023-11-08');
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (2, 2, 5, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (3, 2, 6, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (4, 3, 2, '2023-11-08');
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (5, 3, 4, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (6, 4, 3, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (7, 5, 3, '2023-11-08');
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (8, 6, 1, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (9, 6, 2, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (10, 7, 1, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (11, 8, 1, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (12, 8, 4, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (13, 9, 2, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (14, 10, 1, '2023-11-08'); 
+INSERT into peopleroles(peopleroles_id, peopleroles_people_id, peopleroles_roles_id, peopleroles_date_assigned) values (15, 10, 2, '2023-11-08'); 
