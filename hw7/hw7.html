@@ -3387,15 +3387,29 @@ z-index: 1000;
 <div>
 <div>
 <pre class="mermaid mermaid-js">erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    CUSTOMER{
-        int id
-        string first_name
-        string last_name
+    people ||--o{ skills : posesses
+    people }|--|{ roles: has
+    skills {
+        int skills_id
+        string skills_name
+        string skills_description
+        string skills_tag
+        int skills_time_commitment
     }
-    DELIVERY-ADDRESS {
-        int id
+    people {
+        int people_id
+        string people_first_name
+        string people_last_name
+        string people_email
+        string people_linkedin_url
+        string people_headshot_url
+        string people_brief_bio 
+        date people_date_joined
+    }
+    roles {
+        int roles_id
+        string roles_name
+        int sort_priority
     }
 </pre>
 </div>
@@ -3411,7 +3425,7 @@ z-index: 1000;
 <p>The <em>people</em> table contains elements that describe the current employees information, including their contact information, and a brief bio on each employee.</p>
 <p>Below is a list of data in the <em>people</em> table.</p>
 <div class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="56">
 <div>
 
 
@@ -3540,28 +3554,6 @@ z-index: 1000;
 <td>Passionate Worker</td>
 <td>2019-10-03</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>11</td>
-<td>Greg</td>
-<td>Person 11</td>
-<td>cbhue2@aol.com</td>
-<td>linkedin.com</td>
-<td>hshot.jpg</td>
-<td>Passionate Worker</td>
-<td>2021-10-03</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>12</td>
-<td>Beety</td>
-<td>Person 12</td>
-<td>bgeorge2@aol.com</td>
-<td>linkedin.com</td>
-<td>hshot.jpg</td>
-<td>Passionate Worker</td>
-<td>1992-11-07</td>
-</tr>
 </tbody>
 </table>
 
@@ -3574,7 +3566,7 @@ z-index: 1000;
 <p>The <em>skills</em> table contains elements that describe the skills people working at the company currently possess, the skills present are apart of a general skill set.</p>
 <p>Below is a list of data in the <em>skills</em> table.</p>
 <div class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="57">
 <div>
 
 
@@ -3666,7 +3658,7 @@ z-index: 1000;
 <p>The <em>roles</em> table contains elements that describe the role(s) each employee has at the company, as well as when each employee earned/ was assigned each role.</p>
 <p>Below is a list of data in the <em>roles</em> table.</p>
 <div class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <div>
 
 
@@ -3737,7 +3729,7 @@ z-index: 1000;
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="60">
 <div>
 
 
@@ -3823,7 +3815,7 @@ z-index: 1000;
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="61">
 <div>
 
 
@@ -3851,60 +3843,48 @@ z-index: 1000;
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>Greg</td>
-<td>Person 11</td>
-<td>cbhue2@aol.com</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Beety</td>
-<td>Person 12</td>
-<td>bgeorge2@aol.com</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
 <td>Brian</td>
 <td>Person 2</td>
 <td>bbruce1@aol.com</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<td data-quarto-table-cell-role="th">3</td>
 <td>Hal</td>
 <td>Person 3</td>
 <td>horr1@aol.com</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<td data-quarto-table-cell-role="th">4</td>
 <td>Ryan</td>
 <td>Person 4</td>
 <td>rpurple1@aol.com</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<td data-quarto-table-cell-role="th">5</td>
 <td>Greg</td>
 <td>Person 5</td>
 <td>cGreg1@aol.com</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<td data-quarto-table-cell-role="th">6</td>
 <td>Beety</td>
 <td>Person 6</td>
 <td>bgeorge1@aol.com</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<td data-quarto-table-cell-role="th">7</td>
 <td>Chad</td>
 <td>Person 7</td>
 <td>cbrown2@aol.com</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
+<td data-quarto-table-cell-role="th">8</td>
 <td>Brian</td>
 <td>Person 8</td>
 <td>bbruce2@aol.com</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
+<td data-quarto-table-cell-role="th">9</td>
 <td>Hal</td>
 <td>Person 9</td>
 <td>horr2@aol.com</td>
@@ -3934,7 +3914,7 @@ z-index: 1000;
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="62">
 <div>
 
 
@@ -3983,7 +3963,7 @@ z-index: 1000;
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="63">
 <div>
 
 
@@ -4046,7 +4026,7 @@ z-index: 1000;
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 
 
@@ -4109,7 +4089,7 @@ z-index: 1000;
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="65">
 <div>
 
 
@@ -4128,18 +4108,6 @@ z-index: 1000;
 <td>Ryan</td>
 <td>Person 4</td>
 <td>rpurple1@aol.com</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Greg</td>
-<td>Person 11</td>
-<td>cbhue2@aol.com</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Beety</td>
-<td>Person 12</td>
-<td>bgeorge2@aol.com</td>
 </tr>
 </tbody>
 </table>
@@ -4166,7 +4134,7 @@ z-index: 1000;
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <div>
 
 
@@ -4225,7 +4193,7 @@ z-index: 1000;
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="67">
 <div>
 
 
@@ -4285,7 +4253,7 @@ z-index: 1000;
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred:</span><span class="ch">\n\n</span><span class="sc">{</span>message<span class="sc">}</span><span class="ch">\n\n</span><span class="ss">Ignoring and moving on.&quot;</span>)</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <div>
 
 

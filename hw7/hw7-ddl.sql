@@ -87,8 +87,7 @@ insert into people (people_id,people_first_name,people_last_name,people_email, p
 insert into people (people_id,people_first_name,people_last_name,people_email, people_date_joined) values (8,'Brian', 'Person 8', 'bbruce2@aol.com', '2015-03-13');
 insert into people (people_id,people_first_name,people_last_name,people_email, people_date_joined) values (9,'Hal', 'Person 9', 'horr2@aol.com', '2006-08-14');
 insert into people (people_id,people_first_name,people_last_name,people_email, people_date_joined) values (10,'Ryan', 'Person 10', 'rpurple2@aol.com', '2019-10-03');
-insert into people (people_id,people_first_name,people_last_name,people_email, people_date_joined) values (11,'Greg', 'Person 11', 'cbhue2@aol.com', '2021-10-03');
-insert into people (people_id,people_first_name,people_last_name,people_email, people_date_joined) values (12,'Beety', 'Person 12', 'bgeorge2@aol.com', '1992-11-07');
+
 
 
 # Section 6

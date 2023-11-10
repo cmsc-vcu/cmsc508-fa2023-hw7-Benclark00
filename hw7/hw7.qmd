@@ -99,15 +99,29 @@ This diagram shows that a customer may place none or multiple orders, and each o
 ```{mermaid}
 %%| echo: false
 erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    CUSTOMER{
-        int id
-        string first_name
-        string last_name
+    people ||--o{ skills : posesses
+    people }|--|{ roles: has
+    skills {
+        int skills_id
+        string skills_name
+        string skills_description
+        string skills_tag
+        int skills_time_commitment
     }
-    DELIVERY-ADDRESS {
-        int id
+    people {
+        int people_id
+        string people_first_name
+        string people_last_name
+        string people_email
+        string people_linkedin_url
+        string people_headshot_url
+        string people_brief_bio 
+        date people_date_joined
+    }
+    roles {
+        int roles_id
+        string roles_name
+        int sort_priority
     }
 ```
 
